@@ -1,6 +1,6 @@
 import React from "react";
 
-function Buttons({ inpNum, opr, strdNum, chgStrdNumFunc, chgInpNumFunc, chgInpOprFunc }) {
+function Buttons({ inpNum, chgInpNumFunc, strdNum, chgStrdNumFunc, opr, chgInpOprFunc }) {
   
     function disp(a) {
     if (a === "clear") {
