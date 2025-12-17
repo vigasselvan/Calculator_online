@@ -14,7 +14,7 @@ function Buttons({ inpNum, chgInpNumFunc, strdNum, chgStrdNumFunc, opr, chgInpOp
           num = inpNum + a + 0;
           setIsDecimal(true);
         }else if (isDecimal){    
-          num = (inpNum * 1)+ a / dec;   
+          num = (inpNum * 1)+ (a / dec)*1;   
           setDec(dec*10);
         }else{
           num = inpNum * 10 + a;
