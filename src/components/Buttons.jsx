@@ -17,50 +17,50 @@ function Buttons({ inpNum, chgInpNumFunc, strdNum, chgStrdNumFunc, opr, chgInpOp
     chgInpOprFunc("");
   }
   
-  function OprFunc(oprtr){
-    calc();
+  async function OprFunc(oprtr){
+    const result = await calc();
+    chgStrdNumFunc(result);
     chgInpOprFunc(oprtr);
 
-    chgInpNumFunc("");    
+    chgInpNumFunc("");  
+    
+    console.log("inp: " + inpNum);
+    console.log("strd: " + strdNum);
+    console.log("opr: " + opr);
   }
 
-  async function equalFunc() {
-    await calc();
-    await chgInpNumFunc(strdNum); //to display the output in the screen
-  
-    chgInpOprFunc("");
-  }
+async function equalFunc() {
+  const result = await calc();
+
+  chgStrdNumFunc(result);
+  chgInpNumFunc(result); // display result immediately
+  chgInpOprFunc("");
+}
+
 
   function LastValRem(){
     var num = parseInt(inpNum / 10);
     chgInpNumFunc(num);
+  } 
+
+  function calc() {
+    return new Promise(resolve => {
+      let result;
+
+      if (opr === "") {
+        resolve(inpNum);
+      } else {
+        switch (opr) {
+          case "+": result = strdNum + inpNum; break;
+          case "-": result = strdNum - inpNum; break;
+          case "*": result = strdNum * inpNum; break;
+          case "/": result = strdNum / inpNum; break;
+        }
+        resolve(result);
+      }
+    });
   }
-
-  async function calc() {
-      new Promise(resolve => {
-
-        let result;
-
-        if(opr !== ""){                                     
-          switch (opr){
-            case "+": result = strdNum + inpNum;         
-                      break;
-            case "-": result = strdNum - inpNum;
-                      break;
-            case "*": result = strdNum * inpNum;
-                      break;
-            case "/": result = strdNum / inpNum;
-                      break;
-            default : console.log("Error!!! (error in selecting the operator)"); 
-          }
-          resolve(chgStrdNumFunc(result)); //resolve() is used inorder to complete this as important.
-        }
-
-        if(opr === ""){
-          chgStrdNumFunc(inpNum);
-        }
-    }); 
-    }     
+   
   
   //need to click the equal button twice to get the correct output.
 
