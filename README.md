@@ -6,5 +6,5 @@ This calculator web application made up of REACT JS, Created for to practise my 
 
 #ERROR
 
-There is a bug in this app, you should press '=' twice to get the correct solution.
+'.' can't be implemented
 If you know how to solve this bug, Email me: vigasselvan@gmail.com

@@ -1,20 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
 
 function Buttons({ inpNum, chgInpNumFunc, strdNum, chgStrdNumFunc, opr, chgInpOprFunc }) {
   
+  const [isDecimal, setIsDecimal] = useState(false);    //using state as change in state of existing variable will re-render the whole comp, which will replace all the changes made before. 
+  const [dec, setDec] = useState(10);    //to update the values in correct place after decimal is used.
+
     function disp(a) {
-    if (a === "clear") {
-      chgInpNumFunc("");
-    } else {
-      var num = inpNum * 10 + a;
-      chgInpNumFunc(num);
+      if (a === "clear") {
+        chgInpNumFunc("");
+      } else{
+        let num = 0;
+        if(a == '.'){
+          num = inpNum + a + 0;
+          setIsDecimal(true);
+        }else if (isDecimal){    
+          num = (inpNum * 1)+ a / dec;   
+          setDec(dec*10);
+        }else{
+          num = inpNum * 10 + a;
+        }
+        chgInpNumFunc(num);
+      }
     }
-  }
 
   function clear() {
     chgInpNumFunc("");
     chgStrdNumFunc("");
     chgInpOprFunc("");
+    setIsDecimal(false);
+    setDec(10);
   }
   
   async function OprFunc(oprtr){
@@ -23,6 +37,8 @@ function Buttons({ inpNum, chgInpNumFunc, strdNum, chgStrdNumFunc, opr, chgInpOp
     chgInpOprFunc(oprtr);
 
     chgInpNumFunc("");  
+    setIsDecimal(false);
+    setDec(10);
     
     console.log("inp: " + inpNum);
     console.log("strd: " + strdNum);
@@ -35,11 +51,13 @@ async function equalFunc() {
   chgStrdNumFunc(result);
   chgInpNumFunc(result); // display result immediately
   chgInpOprFunc("");
+  setIsDecimal(false);
+  setDec(10);
 }
 
 
   function LastValRem(){
-    var num = parseInt(inpNum / 10);
+    let num = parseInt(inpNum / 10);
     chgInpNumFunc(num);
   } 
 
