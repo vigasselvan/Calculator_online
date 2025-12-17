@@ -23,6 +23,21 @@ function Buttons({ inpNum, chgInpNumFunc, strdNum, chgStrdNumFunc, opr, chgInpOp
       }
     }
 
+  function updateDecimalState(){
+    if(inpNum % 1 != 0){
+      setIsDecimal(true);
+      let num = inpNum - Math.floor(num);
+      let count = 10;
+
+      while(num != 0){
+        num*=10;
+        count*=10;
+      } 
+
+      setDec(count);
+    }
+  }
+
   function clear() {
     chgInpNumFunc("");
     chgStrdNumFunc("");
@@ -51,8 +66,7 @@ async function equalFunc() {
   chgStrdNumFunc(result);
   chgInpNumFunc(result); // display result immediately
   chgInpOprFunc("");
-  setIsDecimal(false);
-  setDec(10);
+  updateDecimalState();
 }
 
 
