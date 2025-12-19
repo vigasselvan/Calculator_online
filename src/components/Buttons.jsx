@@ -10,9 +10,11 @@ function Buttons({ inpNum, chgInpNumFunc, strdNum, chgStrdNumFunc, opr, chgInpOp
         chgInpNumFunc("");
       } else{
         let num = 0;
-        if(a == '.'){
+        if(a == '.' && !isDecimal){
           num = inpNum + a + 0;
           setIsDecimal(true);
+        }else if(a == '.' && isDecimal){
+          num = inpNum + 0;    //when decimal is already placed, restricting adding more decimal.
         }else if (isDecimal){    
           num = (inpNum * 1)+ (a / dec)*1;   
           setDec(dec*10);
@@ -92,7 +94,7 @@ async function equalFunc() {
       }
     });
   }
-  
+
 
   return (
     <div className="buttonCont">
