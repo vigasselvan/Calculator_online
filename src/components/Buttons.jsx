@@ -14,7 +14,7 @@ function Buttons({ inpNum, chgInpNumFunc, strdNum, chgStrdNumFunc, opr, chgInpOp
           num = inpNum + a + 0;
           setIsDecimal(true);
         }else if(a == '.' && isDecimal){
-          num = inpNum + 0;    //when decimal is already placed, restricting adding more decimal.
+          num = inpNum;    //when decimal is already placed, restricting adding more decimal.
         }else if (isDecimal){    
           num = (inpNum * 1)+ (a / dec)*1;   
           setDec(dec*10);
@@ -71,11 +71,29 @@ async function equalFunc() {
   updateDecimalState();
 }
 
+  function floorToPrecision(num, precision) {
+   
+  }
 
-  function LastValRem(){
-    let num = parseInt(inpNum / 10);
-    chgInpNumFunc(num);
-  } 
+function LastValRem() {
+  let numStr = inpNum.toString();
+
+  numStr = numStr.slice(0, -1);
+
+  // handle empty or just "-"
+  if (numStr === "" || numStr === "-") {
+    chgInpNumFunc(0);
+    return;
+  }
+
+  // update decimal flag
+  if (!numStr.includes(".")) {
+    setIsDecimal(false);
+  }
+
+  chgInpNumFunc(Number(numStr));
+}
+
 
   function calc() {
     return new Promise(resolve => {
