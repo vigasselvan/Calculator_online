@@ -8,7 +8,7 @@ function ScreenCalc ({inpNum, chgInpNumFunc}){
     
     return (
         <div>
-            <input type="text" id="calcScr" name="calcScr" dir="rtl" value={inpNum} style={scrStyle}></input>
+            <input type="text" id="calcScr" name="calcScr" dir="rtl" value={inpNum} onChange={e => {chgInpNumFunc(e.target.value)}} style={scrStyle}></input>
         </div>
     );
 }

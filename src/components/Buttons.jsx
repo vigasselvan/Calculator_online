@@ -92,9 +92,7 @@ async function equalFunc() {
       }
     });
   }
-   
   
-  //need to click the equal button twice to get the correct output.
 
   return (
     <div className="buttonCont">
